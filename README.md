@@ -10,6 +10,6 @@ Corso di  grafica in movimento 2025, SUPSI
 - [Movimento: 2 frame]
 - [Movimento: 3 frame]
 - [Rotazione 360: 2 frame]
-- [ROtazione 360: 3 frame]
+- [Rotazione 360: 3 frame]
 
 
