@@ -12,7 +12,6 @@ Corso di  grafica in movimento 2025, SUPSI
 - [Rotazione 360: 2 frame](https://astropengu.github.io/gim/Esercizio_1A/rotazione_2.html)
 - [Rotazione 360: 3 frame](https://astropengu.github.io/gim/Esercizio_1A/rotazione_3.html)     
 
-
 ## Esercizio 1B
 [Logo animato]()     
 
