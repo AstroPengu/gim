@@ -20,4 +20,4 @@ Corso di  grafica in movimento 2025, SUPSI
 [Commento sulla lettura]()   
 
 ## Esercizio 2
-[Parallax]
+- [Parallax]
