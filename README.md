@@ -16,7 +16,16 @@ Corso di  grafica in movimento 2025, SUPSI
 [Logo animato](https://astropengu.github.io/gim/Esercizio_1B/logo_animato.html)     
 
 ## Esercizio 1C
-[Commento sulla lettura]()   
+[Commento sulla lettura](https://astropengu.github.io/gim/Esercizio_1C/README.md)   
 
 ## Esercizio 2      
 [Parallax]()
+
+## Esercizio 3A
+[Pioggia]
+[Neve]
+[ping-Pong]
+
+## Esercizio 3B 
+[Orologio]
+
