@@ -1,19 +1,3 @@
-# Esercizio 1C
-Lettura
-
-## Brief
-Leggere il testo di Kleist e scrivere un commento e publiccarlo nel file README.md.
-(Va segnalato l’uso di LLM, in fondo al testo, con precisione). 
-
-## Restrizioni
-- 400-1000 caratteri
-
-## Consegna
-Pubblicare il commento sulla piattaforma GitHub nel file README.md.
-
-## Struttura cartella
-```
-GIM/esercizio_1C
-	README.md
-``` 
-
+Personalmente non ho compreso con precisione il messaggio racchiuso in questo testo, ma posso supporre che il "signor C..." stesse cercando di ispirare il narratore a riflettere sulla bellezza (grazia) della semplicità, o dell' integrità.
+Il "sinor C..." sembra avere una visone "purista" riguardo il concetto di movimento,
+apprezzandolo specialmente nella forma più de-umanizzata possibile: puro, primitivo, originale, non intaccatacato dai limiti fisici di un corpo umano o dai pensieri di una mente umana. 
