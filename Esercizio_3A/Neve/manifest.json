@@ -1,7 +1,7 @@
 {
-	"name": "Titolo",
-	"short_name": "Titolo",
-	"description": "Titolo",
+	"name": "Neve",
+	"short_name": "Neve",
+	"description": "Neve",
 	"display_override": ["fullscreen"],
 	"display": "standalone",
 	"icons": [
