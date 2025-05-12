@@ -19,7 +19,7 @@ Corso di  grafica in movimento 2025, SUPSI
 [Commento sulla lettura](https://astropengu.github.io/gim/Esercizio_1C/README.md)   
 
 ## Esercizio 2      
-[Parallax]()
+[Parallax](https://astropengu.github.io/gim/Esercizio_2/Parallax_animato.html)
 
 ## Esercizio 3A
 [Pioggia]
