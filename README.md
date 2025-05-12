@@ -22,9 +22,9 @@ Corso di  grafica in movimento 2025, SUPSI
 [Parallax](https://astropengu.github.io/gim/Esercizio_2/Parallax_animato.html)
 
 ## Esercizio 3A
-- [Pioggia]
-- [Neve]
-- [ping-Pong]
+- [Pioggia](https://astropengu.github.io/gim/Esercizio_3A/Pioggia/pioggia.html)
+- [Neve](https://astropengu.github.io/gim/Esercizio_3A/Neve/neve.html)
+- [ping-Pong](https://astropengu.github.io/gim/Esercizio_3A/Pong/pong.html)
 
 ## Esercizio 3B 
 [Orologio]
