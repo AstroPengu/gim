@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            font-family: 'Roboto Mono', monospace;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .clock-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .time-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .time-label {
+            color: #00ff41;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .binary-display {
+            display: flex;
+            gap: 5px;
+        }
+
+        .bit {
+            width: 25px;
+            height: 25px;
+            border: 2px solid #00ff41;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: #00ff41;
+            background: #000;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bit.active {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+            text-shadow: none;
+        }
+
+        .bit.active::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #00ff41, #00cc33, #00ff41);
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        .bit:not(.active) {
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+        }
+
+        .date-section {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-top: -230px;
+            z-index: 2;
+        }
+
+        .date-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .date-item .time-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .date-number {
+            color: #00ff41;
+            font-size: 10px;
+            font-weight: 400;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.6);
+            font-family: 'Roboto Mono', monospace;
+            opacity: 0.8;
+        }
+
+        .centiseconds-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            margin-top: 200px;
+            z-index: 2;
+        }
+
+        .centiseconds-center .time-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .deciseconds-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            margin-top: 240px;
+            z-index: 2;
+        }
+
+        .deciseconds-center .time-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .milliseconds-center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            margin-top: 280px;
+            z-index: 2;
+        }
+
+        .milliseconds-center .time-label {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #00ff41;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.8);
+        }
+
+        .precision-number {
+            color: #00ff41;
+            font-size: 10px;
+            font-weight: 400;
+            text-shadow: 0 0 5px rgba(0, 255, 65, 0.6);
+            font-family: 'Roboto Mono', monospace;
+            opacity: 0.8;
+        }
+
+        @keyframes matrix-rain {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .matrix-char {
+            position: absolute;
+            color: #00ff41;
+            font-size: 12px;
+            animation: matrix-rain linear infinite;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+    
+    <div class="date-section">
+        <div class="date-item">
+            <div class="time-label">Year</div>
+            <div class="date-number" id="year"></div>
+        </div>
+        
+        <div class="date-item">
+            <div class="time-label">Month</div>
+            <div class="date-number" id="month"></div>
+        </div>
+        
+        <div class="date-item">
+            <div class="time-label">Day</div>
+            <div class="date-number" id="day"></div>
+        </div>
+    </div>
+    
+    <div class="centiseconds-center">
+    <div class="time-label">Deciseconds</div>
+    <div class="precision-number" id="deciseconds"></div>
+</div>
+
+<div class="deciseconds-center">
+    <div class="time-label">Centiseconds</div>
+    <div class="precision-number" id="centiseconds"></div>
+</div>
+    
+    <div class="milliseconds-center">
+        <div class="time-label">Milliseconds</div>
+        <div class="precision-number" id="milliseconds"></div>
+    </div>
+    
+    <div class="clock-container">
+        <div class="time-section">
+            <div class="time-label">Hours</div>
+            <div class="binary-display" id="hours"></div>
+        </div>
+        
+        <div class="time-section">
+            <div class="time-label">Minutes</div>
+            <div class="binary-display" id="minutes"></div>
+        </div>
+        
+        <div class="time-section">
+            <div class="time-label">Seconds</div>
+            <div class="binary-display" id="seconds"></div>
+        </div>
+    </div>
+
+    <script>
+        // Crea l'effetto Matrix di sfondo
+        function createMatrixRain() {
+            const bg = document.getElementById('matrixBg');
+            const chars = '01';
+            
+            setInterval(() => {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                char.style.fontSize = (Math.random() * 8 + 8) + 'px';
+                
+                bg.appendChild(char);
+                
+                setTimeout(() => {
+                    char.remove();
+                }, 5000);
+            }, 100);
+        }
+
+        // Converte un numero in binario con padding
+        function toBinary(num, bits) {
+            return num.toString(2).padStart(bits, '0');
+        }
+
+        // Crea la rappresentazione binaria per una sezione
+        function createBinaryDisplay(container, value, bits) {
+            container.innerHTML = '';
+            const binary = toBinary(value, bits);
+            
+            for (let i = 0; i < bits; i++) {
+                const bit = document.createElement('div');
+                bit.className = 'bit';
+                const bitValue = binary[i];
+                bit.textContent = bitValue;
+                
+                if (bitValue === '1') {
+                    bit.classList.add('active');
+                }
+                
+                container.appendChild(bit);
+            }
+        }
+
+        // Aggiorna l'orologio
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+            const deciseconds = Math.floor(milliseconds / 100);
+            const centiseconds = Math.floor(milliseconds / 10);
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const dayOfMonth = now.getDate();
+            
+            // Sezioni data sopra l'orologio
+            document.getElementById('year').textContent = toBinary(year, 16);
+            document.getElementById('month').textContent = toBinary(month, 8);
+            document.getElementById('day').textContent = toBinary(dayOfMonth, 8);
+            
+            // Sezioni precisione al centro sotto l'orologio
+            document.getElementById('deciseconds').textContent = toBinary(deciseconds, 8);
+            document.getElementById('centiseconds').textContent = toBinary(centiseconds, 8);
+            document.getElementById('milliseconds').textContent = toBinary(milliseconds, 8);
+            
+            // Orologio principale al centro (celle)
+            createBinaryDisplay(document.getElementById('hours'), hours, 8);
+            createBinaryDisplay(document.getElementById('minutes'), minutes, 8);
+            createBinaryDisplay(document.getElementById('seconds'), seconds, 8);
+        }
+
+        // Inizializza
+        createMatrixRain();
+        updateClock();
+        setInterval(updateClock, 100);
+    </script>
+</body>
+</html>
