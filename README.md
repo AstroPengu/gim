@@ -27,5 +27,5 @@ Corso di  grafica in movimento 2025, SUPSI
 - [Ping-Pong](https://astropengu.github.io/gim/Esercizio_3A/Pong/pong.html)
 
 ## Esercizio 3B 
-[Orologio](https://astropengu.github.io/gim/Esercizio_3B/Orologio/index.html)
+[Orologio](https://astropengu.github.io/gim/Esercizio_3B/Orologio_digitale/index.html)
 
