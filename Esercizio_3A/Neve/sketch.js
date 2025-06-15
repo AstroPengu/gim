@@ -41,7 +41,7 @@ function draw() {
   
   stroke(255) 
   fill(255)
-  rect(0, 500,    1000, 500)
+  rect(0, 500,    3000, 500)
   ellipse (700, 460, 140)
   ellipse (700, 380, 105)
   ellipse (700, 310, 80)
